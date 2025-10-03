@@ -7,11 +7,41 @@ public class Book {
     private String checkedOutTo;
     private boolean isCheckedOut;
 
-    public Book(int id, String title, String Location) {
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
         this.id = id;
-        this.title = title;
+    }
+    public String getLocation() {
+        return location;
+    }
+    public void setLocation(String location) {
         this.location = location;
-        this.checkedOutTo = "";
-        this.isCheckedOut = false;
+    }
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public String getCheckedOutTo() {
+        return checkedOutTo;
+    }
+    public void setCheckedOutTo(String checkedOutTo) {
+        this.checkedOutTo = checkedOutTo;
+    }
+    public boolean isCheckedOut() {
+        return isCheckedOut;
+    }
+    public void setCheckedOut(boolean checkedOut) {
+        isCheckedOut = checkedOut;
     }
 }
+
+
+
+
+
+
