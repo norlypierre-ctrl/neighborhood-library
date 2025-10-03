@@ -2,6 +2,7 @@ package com.pluralsight;
 
 public class Book {
     private int id;
+    private String isbn;
     private String title;
     private String location;
     private String checkedOutTo;
@@ -14,17 +15,23 @@ public class Book {
     public void setId(int id) {
         this.id = id;
     }
-    public String getLocation() {
-        return location;
+    public String getIsbn() {
+        return isbn;
     }
-    public void setLocation(String location) {
-        this.location = location;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
     public String getTitle() {
         return title;
     }
     public void setTitle(String title) {
         this.title = title;
+    }
+    public String getLocation() {
+        return location;
+    }
+    public void setLocation(String location) {
+        this.location = location;
     }
     public String getCheckedOutTo() {
         return checkedOutTo;
@@ -37,6 +44,8 @@ public class Book {
     }
     public void setCheckedOut(boolean checkedOut) {
         isCheckedOut = checkedOut;
+    }
+    public void  checkOut(String name) {
     }
 }
 
