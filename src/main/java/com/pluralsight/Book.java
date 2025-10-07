@@ -4,7 +4,6 @@ public class Book {
     private int id;
     private String isbn;
     private String title;
-    private String location;
     private String checkedOutTo;
     private boolean isCheckedOut;
 
@@ -27,12 +26,6 @@ public class Book {
     public void setTitle(String title) {
         this.title = title;
     }
-    public String getLocation() {
-        return location;
-    }
-    public void setLocation(String location) {
-        this.location = location;
-    }
     public String getCheckedOutTo() {
         return checkedOutTo;
     }
@@ -46,6 +39,7 @@ public class Book {
         isCheckedOut = checkedOut;
     }
     public void  checkOut(String name) {
+
     }
 }
 
