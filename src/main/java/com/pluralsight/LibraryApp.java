@@ -2,14 +2,14 @@ package com.pluralsight;
 
 import java.util.Scanner;
 
-public class LibaryApp {
+public class LibraryApp {
 
     private static Book[] catalog = new Book[20];
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        addBooks;
-        homeScreen;
+        addBooks();
+        homeScreen();
     }
 
     private static void addBooks() {
@@ -61,15 +61,13 @@ public class LibaryApp {
         }
     }
     private static void showAvailableBooks() {
-        System.out.println("n\"     Available Books    ");
+        System.out.println("\n     Available Books    ");
 
         boolean obtainable = false;
 
-        for (int i = 0; i < catalog.length; i++) {
-            Book b = catalog[i];
-
+        for (Book b : catalog) {
             if (!b.isCheckedOut()) {
-                System.out.println(b.getId() + "|" + b.getIsbn() + "|" + b.getTitle());
+                System.out.println(b.toString());
                 obtainable = true;
             }
         }
@@ -77,7 +75,49 @@ public class LibaryApp {
             System.out.println("There are no books available.");
             return;
         }
+
         System.out.println("\nEnter Book ID to checkout or X out to return: ");
+        String input = scanner.nextLine();
+
+        if (input.equalsIgnoreCase("X")) return;
+
+        try{
+            int id = Integer.parseInt(input);
+            Book book = findBookId(id);
+
+            if (book == null) {
+                System.out.println("Invalid book ID.");
+            } else if (book.isCheckedOut()) {
+                System.out.println("Book is already checked out.");
+            } else {
+                System.out.println("Enter your name: ");
+                String name = scanner.nextLine();
+                book.checkOut(name);
+                System.out.println("Book checked out successfully!");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Input invalid! please enter a number.");
+        }
+    }
+
+    private static void showCheckedOutBooks() {
+        System.out.println("\n     Checked Out Books    ");
+
+        boolean borrowed = false;
+
+        for (Book b : catalog) {
+
+            if (b.isCheckedOut()) {
+                System.out.println(b.toString());
+                borrowed = true;
+            }
+        }
+        if (!borrowed) {
+            System.out.println("There are no books checked out.");
+            return;
+        }
+
+        System.out.println("\nEnter Book ID to check in or X to return: ");  // 🟣 FIX: Corrected prompt
         String input = scanner.nextLine();
 
         if (input.equalsIgnoreCase("X")) {
@@ -90,53 +130,6 @@ public class LibaryApp {
 
             if (book == null) {
                 System.out.println("Invalid book ID.");
-            } else if (book.isCheckedOut()) {
-                System.out.println("Enter name: ");
-                String name = scanner.nextLine();
-                book.checkOut(name);
-                System.out.println("Book checked out successfully!");
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Input invalid! please enter a number.");
-        }
-
-            System.out.println();
-
-    }
-}
-    private static void showCheckedOutBooks() {
-        System.out.println("n\"     Checked Out Books    ");
-
-        boolean borrowed = false;
-
-        for (Book b : catalog) {
-
-            if (!b.isCheckedOut()) {
-                System.out.println(b.getId() + "|" + b.getIsbn() + "|" + b.getTitle + "|" + b.getTitle() + " | Checked out to: " + b.getCheckedOutTo());
-                borrowed = true;
-            }
-        }
-        if (!borrowed) {
-            System.out.println("There are no books checked out.");
-            return;
-        }
-
-        System.out.println("\nEnter C to checkout or X out to return: ");
-        String input = scanner.nextLine();
-
-        if (input.equalsIgnoreCase("X")) {
-            return;
-        } else if (input.equalsIgnoreCase("C")) {
-            System.out.println("Enter the Book ID to check in: ");
-            String idInput = scanner.nextLine();
-        }
-
-        try{
-            int id = Integer.parseInt(idInput);
-            Book book = findBookId(id);
-
-            if (book == null) {
-                System.out.println("Invalid book ID.");
             } else if (!book.isCheckedOut()) {
                 System.out.println("The book is not checked out.");
             }else {
@@ -145,12 +138,19 @@ public class LibaryApp {
             }
         } catch (NumberFormatException e) {
             System.out.println("Input invalid! please enter a number.");
-        }else
-            System.out.println("Option invalid");
+        }
+    }
+
+    private static Book findBookId (int id) {
+        for (Book b : catalog) {
+            if (b.getId() == id) {
+                return b;
     }
 }
 
-
+return null;
+    }
+}
 
 
 
